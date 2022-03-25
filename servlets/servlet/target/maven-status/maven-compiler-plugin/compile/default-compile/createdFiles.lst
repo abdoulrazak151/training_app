@@ -1,0 +1,6 @@
+ws\JaxRsActivator.class
+ws\ModuleRessource.class
+ws\TrainingRequest.class
+servlet\ModuleServlet.class
+servlet\TrainingServlet.class
+ws\TrainingRessource.class

@@ -1,0 +1,8 @@
+entities\Training.class
+entities\Course.class
+entities\Tutorial.class
+entities\Module.class
+sessions\TrainingManager.class
+interceptors\LoggingInterceptor.class
+sessions\ModuleManager.class
+entities\Project.class
