@@ -26,12 +26,9 @@
             </div>
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">number of group</span>
-                <input type="number" class="form-control" placeholder="name" name="number_group" aria-label="name" aria-describedby="basic-addon1" min 0>
+                <input type="number" class="form-control" placeholder="name" name="classroom" aria-label="name" aria-describedby="basic-addon1" min 0>
           </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">number of student per group</span>
-            <input type="number" class="form-control" placeholder="name" name="number_group" aria-label="name" aria-describedby="basic-addon1" min 0>
-      </div>
+
                 <div class="col-12">
                 <button class="btn btn-primary" type="submit">enregistrer</button>
                 </div>

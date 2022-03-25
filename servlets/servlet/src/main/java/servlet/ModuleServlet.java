@@ -1,6 +1,8 @@
 package servlet;
 
+import entities.Course;
 import entities.Module;
+import entities.Project;
 import entities.Tutorial;
 import jakarta.ejb.EJB;
 import jakarta.persistence.criteria.CriteriaBuilder.In;
@@ -36,7 +38,9 @@ public class ModuleServlet extends HttpServlet {
             case "list_module":{
                 target="list_module.jsp";
                 int id=Integer.parseInt(req.getParameter("id"));
-                req.setAttribute("id_training", id);
+                List<Module> modules=moduleManager.findModuleByTraining(id);
+               req.setAttribute("id_training", id);
+                req.setAttribute("modules", modules);
                 break;
             }
             case "new_module":{
@@ -53,7 +57,8 @@ public class ModuleServlet extends HttpServlet {
             }
             case "new_course":{
                 target="new_course.jsp";
-                // req.setAttribute("id_training", id);
+                int id=Integer.parseInt(req.getParameter("id"));
+                req.setAttribute("id_training", id);
                 break;
             }
             case "all_module":{
@@ -62,6 +67,22 @@ public class ModuleServlet extends HttpServlet {
                 target="list_module_all.jsp";
                 break;
             }
+            case "view":{
+                int id=Integer.parseInt(req.getParameter("id"));
+                Module module=moduleManager.findModuleById(id);
+                req.setAttribute("module", module);
+                target="module_view.jsp";
+                break;
+            }
+            case "delete":{
+                int id=Integer.parseInt(req.getParameter("id"));
+                moduleManager.deleteModule(id);
+                target="list_module.jsp";
+                
+                
+            }
+           
+            
         }
 
 
@@ -118,12 +139,25 @@ public class ModuleServlet extends HttpServlet {
                 String nbrOfStudents=req.getParameter("number_student_project");
                 String nbrGroup=req.getParameter("number_group");
                 String nbrStudent=req.getParameter("number_student");
+                String duration=req.getParameter("duration_project");
                 if(name.isEmpty() || description.isEmpty() || nbrGroup.isEmpty() || nbrOfStudents.isEmpty() ||  nbrStudent.isEmpty()){
-
+                    target="new_tutorial.jsp";
+                    errorMessage="erreur";
+                    req.setAttribute("errorMessage",errorMessage);
                 }else{
+                    int dur=Integer.parseInt(duration);
                     int nbrS=Integer.parseInt(nbrOfStudents);
                     int nbrSG=Integer.parseInt(nbrStudent);
                     int group=Integer.parseInt(nbrGroup);
+                    Project project=new Project();
+                    project.setDescription(description);
+                    project.setName(name);
+                    project.setNbrOfGroup(group);
+                    project.setNbrOfStudents(nbrS);
+                    project.setNbrOfStudentPerGroup(nbrSG);
+                    project.setDuration(dur);
+                    moduleManager.createProject(id, project);
+                   target= "accueil.jsp";
 
                     try{
 
@@ -160,10 +194,42 @@ public class ModuleServlet extends HttpServlet {
                         errorMessage="a";
 
                     }
-                    break;
+                    
+                }
+                break;
+               
+            } 
+            case "create_course":{
+                int id=Integer.parseInt(req.getParameter("id"));
+                String name=req.getParameter("name_course");
+                String description=req.getParameter("description_course");
+                String numberStudent=req.getParameter("number_student_course");
+                String duration=req.getParameter("duration_course");
+                String classroom=req.getParameter("classroom");
+                if(name.isEmpty() || description.isEmpty() || numberStudent.isEmpty() || duration.isEmpty() || numberStudent.isEmpty()){
+                    target="new_course.jsp";
+                }else{
+                    try{
+                        int dur=Integer.parseInt(duration);
+                        int num=Integer.parseInt(numberStudent);
+                        Course course=new Course();
+                        course.setClassroom(classroom);
+                        course.setDescription(description);
+                        course.setName(name);
+                        course.setNbrOfStudents(num);
+                        course.setDuration(dur);
+                    
+                        moduleManager.createCourse(id, course);
+                        target="accueil.jsp";
+
+
+                    }catch(Exception e){
+
+                    }
                 }
 
             }
+            
 
         }
         RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/WEB-INF/view/"+target);

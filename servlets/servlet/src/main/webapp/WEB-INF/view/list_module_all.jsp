@@ -16,7 +16,7 @@
                           <tr>
                             <th scope="col">#</th>
                             <th scope="col">Denomination</th>
-                            <th scope="col">Nombre de Module</th>
+                            <th scope="col">Duration</th>
                             <th scope="col">Action</th>
                           </tr>
                         </thead>
@@ -25,7 +25,7 @@
                           <tr>
                             <th scope="row">${l.getId()}</th>
                             <td>${l.getName()}</td>
-                            <td>Otto</td>
+                            <td>${l.getDuration}</td>
                             <td><a href="${pageContext.request.contextPath}/module?action=view@id=${l.getId()}">voir</a></td>
                           </tr>
                         </c:forEach>

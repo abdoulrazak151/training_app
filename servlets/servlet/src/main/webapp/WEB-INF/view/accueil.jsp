@@ -29,20 +29,10 @@
                             <th scope="row">${l.getId()}</th>
                             <td>${l.getName()}</td>
                             <td>${l.nbrOfStudents()}</td>
-                            <td><a href="${pageContext.request.contextPath}/module?action=list_module&id=${l.getId()}">voir</a>   <a href="">modifier</a>   <a href=""> Supprimer</a></td>
+                            <td><a href="${pageContext.request.contextPath}/module?action=list_module&id=${l.getId()}">voir</a>   <a href="${pageContext.request.contextPath}/module?action=update_training&id=${l.getId()}">modifier</a>   <a href="${pageContext.request.contextPath}/module?action=delete_training&id=${l.getId()}"> Supprimer</a></td>
                           </tr>
                         </c:forEach>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                          </tr>
+                         
                         </tbody>
                     </table>
                 </div>
