@@ -1,7 +1,9 @@
 package servlet;
 
 import entities.Module;
+import entities.Tutorial;
 import jakarta.ejb.EJB;
+import jakarta.persistence.criteria.CriteriaBuilder.In;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -45,7 +47,8 @@ public class ModuleServlet extends HttpServlet {
             }
             case "new_tutorial":{
                 target="new_tutorial.jsp";
-                // req.setAttribute("id_training", id);
+                int id=Integer.parseInt(req.getParameter("id"));
+                req.setAttribute("id_training", id);
                 break;
             }
             case "new_course":{
@@ -106,6 +109,7 @@ public class ModuleServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String target="";
         String action=req.getParameter("action");
+        String errorMessage="";
         switch(action){
             case "create_project":{
                 int id=Integer.parseInt(req.getParameter("id"));
@@ -129,6 +133,40 @@ public class ModuleServlet extends HttpServlet {
                 }
                 break;
             }
+            case "create_tutorial":{
+                int id=Integer.parseInt(req.getParameter("id"));
+                String name=req.getParameter("name_tutorial");
+                String description =req.getParameter("description_tutorial");
+                String nbreStudents=req.getParameter("number_student_tutorial");
+                String duration=req.getParameter("duration_tutorial");
+                String videoLink=req.getParameter("video_link");
+                if(name.isEmpty() || description.isEmpty() || nbreStudents.isEmpty() || duration.isEmpty() || videoLink.isEmpty()){
+                    target="new_tutorial.jsp";
+              
+                }else{
+                    int nbre=Integer.parseInt(nbreStudents);
+                    int dur=Integer.parseInt(duration);
+                    try{
+                        Tutorial tutorial=new Tutorial();
+                        tutorial.setDuration(dur);
+                        tutorial.setDescription(description);
+                        tutorial.setVideoLink(videoLink);
+                        tutorial.setName(name);
+                        tutorial.setNbrOfStudents(nbre);
+                        moduleManager.createTutorial(id, tutorial);
+                        target="accueil.jsp";
+
+                    }catch(Exception e){
+                        errorMessage="a";
+
+                    }
+                    break;
+                }
+
+            }
+
         }
+        RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/WEB-INF/view/"+target);
+        dispatcher.forward(req, resp);
     }
 }

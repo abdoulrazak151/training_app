@@ -2,8 +2,11 @@ package sessions;
 
 import java.util.List;
 
+import entities.Course;
 import entities.Module;
+import entities.Project;
 import entities.Training;
+import entities.Tutorial;
 import jakarta.ejb.Singleton;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -17,12 +20,52 @@ public class ModuleManager {
         Training training=em.find(Training.class, id_training);
         if(training==null){
             throw new RuntimeException("there is no  training with this id");
-
+          
         }
 
         module.setTraining(training);
         em.persist(module);
         return module;
+
+
+    }
+    public Module createTutorial(int id_training, Tutorial tutorial){
+        Training training=em.find(Training.class, id_training);
+        if(training==null){
+            throw new RuntimeException("there is no  training with this id");
+          
+        }
+
+        tutorial.setTraining(training);
+        em.persist(tutorial);
+        return tutorial;
+
+
+    }
+
+    public Module createProject(int id_training, Project project){
+        Training training=em.find(Training.class, id_training);
+        if(training==null){
+            throw new RuntimeException("there is no  training with this id");
+          
+        }
+
+        project.setTraining(training);
+        em.persist(project);
+        return project;
+
+
+    }
+    public Module createCourse(int id_training, Course course){
+        Training training=em.find(Training.class, id_training);
+        if(training==null){
+            throw new RuntimeException("there is no  training with this id");
+          
+        }
+
+        course.setTraining(training);
+        em.persist(course);
+        return course;
 
 
     }

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="header.jsp"/>
      <div class="container mt-4">
             <div class="card ">
@@ -19,12 +21,14 @@
                           </tr>
                         </thead>
                         <tbody>
+                          <c:forEach var="l" items="${modules}">
                           <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
+                            <th scope="row">${l.getId()}</th>
+                            <td>${l.getName()}</td>
                             <td>Otto</td>
                             <td><a href="">voir</a>   <a href="">modifier</a>   <a href=""> Supprimer</a></td>
                           </tr>
+                        </c:forEach>
                           <tr>
                             <th scope="row">2</th>
                             <td>Jacob</td>

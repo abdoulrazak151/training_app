@@ -2,14 +2,16 @@
      <div class="container mt-4">
             <div class="card ">
                 <div class="card-header">
-
+                <c:if test="${! empty errorMessage}"><p style="color: red;">les infromations ne sont pas correctes</p></c:if>
                 </div>
                 <div class="card-body">
                 <form action="${pageContext.request.contextPath}/module?action=create_course" method="post">
+
+                    <input type="hidden" name="id" value="${id_training}">
             <div class="input-group mb-3">
                       <span class="input-group-text" id="basic-addon1">Training Name</span>
-                      <input type="text" class="form-control" placeholder="name" name="name" aria-label="name" aria-describedby="basic-addon1">
-                </div>
+                      <input type="text" class="form-control" placeholder="name" name="name_course" aria-label="name" aria-describedby="basic-addon1">
+                </div>_
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">description</span>
                     <input type="text" class="form-control" placeholder="description" name="description_course" aria-label="name" aria-describedby="basic-addon1">

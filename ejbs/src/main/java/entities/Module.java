@@ -18,7 +18,7 @@ import jakarta.persistence.Table;
 @Table(name = "modules")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name="categorie", discriminatorType = DiscriminatorType.STRING, length = 25)
-public class Module implements Serializable{
+public abstract class Module implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")

@@ -6,9 +6,10 @@
                 </div>
                 <div class="card-body">
                 <form action="${pageContext.request.contextPath}/module?action=create_project" method="post">
+                    <input type="hidden" name="id" value="${id_training}">
             <div class="input-group mb-3">
                       <span class="input-group-text" id="basic-addon1">Training Name</span>
-                      <input type="text" class="form-control" placeholder="name" name="name" aria-label="name" aria-describedby="basic-addon1">
+                      <input type="text" class="form-control" placeholder="name" name="name_project" aria-label="name" aria-describedby="basic-addon1">
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">description</span>
@@ -28,7 +29,7 @@
           </div>
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">number of student per group</span>
-            <input type="number" class="form-control" placeholder="name" name="number_group" aria-label="name" aria-describedby="basic-addon1" min 0>
+            <input type="number" class="form-control" placeholder="name" name="number_student" aria-label="name" aria-describedby="basic-addon1" min 0>
       </div>
                 <div class="col-12">
                 <button class="btn btn-primary" type="submit">enregistrer</button>
